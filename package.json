@@ -1,0 +1,25 @@
+{
+  "name": "am_automation_be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devStream2144/am_automation_BE.git"
+  },
+  "author": "shubham_hiwale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devStream2144/am_automation_BE/issues"
+  },
+  "homepage": "https://github.com/devStream2144/am_automation_BE#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.5.1"
+  }
+}
