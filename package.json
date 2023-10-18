@@ -22,7 +22,7 @@
     "express": "^4.18.2",
     "jsmodbus": "^4.0.6",
     "modbus-serial": "^8.0.13",
-    "mongoose": "^7.5.1",
+    "mongoose": "^5.12.12",
     "net": "^1.0.2"
   }
 }
