@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const PORT = 8080 || process.env.PORT;
+
 const app = express();
 app.use(cors());
 dotenv.config({ path: ".env" });
@@ -10,6 +11,8 @@ require("./DB/connection");
 
 // API INSTANCE
 app.use("/part", require("./mvc/parts/routers"));
+app.use("/code", require("./mvc/codes/routers"));
+app.use("/modbus", require("./mvc/modbus/routers"));
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);

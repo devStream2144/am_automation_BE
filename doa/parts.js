@@ -17,6 +17,19 @@ module.exports = {
     }
   },
 
+  getAllParts: async (data, cb) => {
+    try {
+      const resp = await parts.find();
+      if (resp) {
+        cb(null, resp, "Part gets successfull!");
+      } else {
+        cb(true, null, "Part get failed!");
+      }
+    } catch (e) {
+      cb(e, null, "Part gets failed!");
+    }
+  },
+
   updateParts: async (data, cb) => {
     try {
       const resp = await parts.findByIdAndUpdate(data.id, data, {
