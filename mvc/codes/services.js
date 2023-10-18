@@ -1,8 +1,8 @@
-const parts = require("../../doa/parts");
+const codes = require("../../doa/codes");
 
-const partsServices = () => {
-  const AddParts = async (data, cb) => {
-    parts.addParts(data, (err, data, message) => {
+const CodeSerivces = () => {
+  const AddCodes = async (data, cb) => {
+    codes.addCodes(data, (err, data, message) => {
       if (err) {
         var resp = {
           message: message,
@@ -19,8 +19,8 @@ const partsServices = () => {
     });
   };
 
-  const GetAllParts = async (data, cb) => {
-    parts.getAllParts(data, (err, data, message) => {
+  const AddCode = async (data, cb) => {
+    codes.addCode(data, (err, data, message) => {
       if (err) {
         var resp = {
           message: message,
@@ -37,8 +37,8 @@ const partsServices = () => {
     });
   };
 
-  const UpdateParts = async (data, cb) => {
-    parts.updateParts(data, (err, data, message) => {
+  const UpdateCode = async (data, cb) => {
+    codes.updateCode(data, (err, data, message) => {
       if (err) {
         var resp = {
           message: message,
@@ -55,8 +55,8 @@ const partsServices = () => {
     });
   };
 
-  const DeleteParts = async (data, cb) => {
-    parts.deleteParts(data, (err, data, message) => {
+  const DeleteCode = async (data, cb) => {
+    codes.deleteCode(data, (err, data, message) => {
       if (err) {
         var resp = {
           message: message,
@@ -73,11 +73,30 @@ const partsServices = () => {
     });
   };
 
+  const GetCodes = async (data, cb) => {
+    codes.getCodes(data, (err, data, message) => {
+      if (err) {
+        var resp = {
+          message: message,
+          success: false,
+        };
+        cb(err, null, resp);
+      } else {
+        var resp = {
+          message: message,
+          success: true,
+        };
+        cb(err, data, resp);
+      }
+    });
+  };
   return {
-    AddParts,
-    UpdateParts,
-    DeleteParts,
-    GetAllParts,
+    AddCodes,
+    AddCode,
+    GetCodes,
+    UpdateCode,
+    DeleteCode,
   };
 };
-module.exports = partsServices();
+
+module.exports = CodeSerivces();

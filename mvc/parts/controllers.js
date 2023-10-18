@@ -12,6 +12,16 @@ module.exports = {
     });
   },
 
+  GetAllParts: (req, res) => {
+    PartsServices.GetAllParts(null, (err, data, message) => {
+      if (!err) {
+        return res.json({ err, data, message });
+      } else {
+        return res.json({ err, data, message });
+      }
+    });
+  },
+
   UpdateParts: (req, res) => {
     var data = req.body;
     var id = req.params.id;
