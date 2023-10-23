@@ -18,11 +18,13 @@
   "homepage": "https://github.com/devStream2144/am_automation_BE#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsmodbus": "^4.0.6",
     "modbus-serial": "^8.0.13",
-    "mongoose": "^5.12.12",
+    "mongoose": "^5.13.20",
+    "multer": "^1.4.5-lts.1",
     "net": "^1.0.2"
   }
 }

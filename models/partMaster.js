@@ -1,23 +1,24 @@
 const mongoose = require("mongoose");
 
 const partsSchema = mongoose.Schema({
-  modalNo: {
+  partName: {
     type: String,
     require: true,
   },
-  quantity: {
-    type: Number,
-    require: true,
-  },
-  partNo: {
+  partCode: {
     type: String,
     require: true,
   },
-  itemCode: {
+  image: {
     type: String,
+    require: true,
+  },
+  dateAndTime: {
+    type: Date,
+    default: Date.now(),
     require: true,
   },
 });
 
-const parts = mongoose.model("parts", partsSchema);
-module.exports = parts;
+const partMaster = mongoose.model("parts", partsSchema);
+module.exports = partMaster;
