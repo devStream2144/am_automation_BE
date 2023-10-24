@@ -3,7 +3,9 @@ const partMaster = require("../models/partMaster");
 module.exports = {
   addParts: async (data, cb) => {
     try {
-      const resp = await new partMaster(data);
+      const docCount = await partMaster.estimatedDocumentCount();
+      console.log("docCount : ", docCount);
+      const resp = await new partMaster({ ...data, partIndex: docCount + 1 });
       if (resp) {
         const save_resp = await resp.save();
         if (save_resp) {

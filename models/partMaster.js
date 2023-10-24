@@ -13,6 +13,10 @@ const partsSchema = mongoose.Schema({
     type: String,
     require: true,
   },
+  partIndex: {
+    type: Number,
+    require: true,
+  },
   dateAndTime: {
     type: Date,
     default: Date.now(),

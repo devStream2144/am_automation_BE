@@ -5,9 +5,14 @@ const upload = require("../../middleware/multer");
 const controller = require("./controllers");
 
 router.post("/add", controller.AddModalMaster);
-// router.get("/get", controller.GetAllParts);
-// // router.post("/get/:id", controller.AddParts);
-// router.put("/update/:id", upload.single("file"), controller.UpdateParts);
-// router.delete("/delete/:id", controller.DeleteParts);
+router.post("/video", upload.single("video"), (req, res) => {
+  const fileName = req?.file?.filename;
+  res.status(200).json({
+    message: "video file uploaded!",
+    filename: fileName,
+    success: true,
+  });
+});
+router.get("/", controller.GetAllModals);
 
 module.exports = router;

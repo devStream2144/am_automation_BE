@@ -10,10 +10,10 @@ const options = {
 
 module.exports = {
   reqToWriteData: (req, res, next) => {
-    const { index, count } = req.body;
+    const partArr = req.body;
     socket.on("connect", function () {
       client
-        .writeSingleRegister(index, count)
+        .writeMultipleRegisters(0, partArr)
         .then(function (resp) {
           req.info = {
             data: resp,

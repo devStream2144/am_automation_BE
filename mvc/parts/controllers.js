@@ -6,7 +6,6 @@ module.exports = {
       partName: req.body.partName,
       partCode: req.body.partCode,
     };
-    console.log("formData : ", formData);
     PartsServices.AddParts(
       { ...formData, image: req?.file?.filename },
       (err, data, message) => {
