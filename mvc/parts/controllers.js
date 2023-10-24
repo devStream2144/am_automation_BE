@@ -2,14 +2,20 @@ const PartsServices = require("./services");
 
 module.exports = {
   AddParts: (req, res) => {
-    var data = req.body;
-    PartsServices.AddParts(data, (err, data, message) => {
-      if (!err) {
-        return res.json({ err, data, message });
-      } else {
-        return res.json({ err, data, message });
+    var formData = {
+      partName: req.body.partName,
+      partCode: req.body.partCode,
+    };
+    PartsServices.AddParts(
+      { ...formData, image: req?.file?.filename },
+      (err, data, message) => {
+        if (!err) {
+          return res.json({ err, data, message });
+        } else {
+          return res.json({ err, data, message });
+        }
       }
-    });
+    );
   },
 
   GetAllParts: (req, res) => {
@@ -23,15 +29,21 @@ module.exports = {
   },
 
   UpdateParts: (req, res) => {
-    var data = req.body;
+    var formData = {
+      partName: req.body.partName,
+      partCode: req.body.partCode,
+    };
     var id = req.params.id;
-    PartsServices.UpdateParts({ ...data, id }, (err, data, message) => {
-      if (!err) {
-        return res.json({ err, data, message });
-      } else {
-        return res.json({ err, data, message });
+    PartsServices.UpdateParts(
+      { ...formData, image: req?.file?.filename, docId: id },
+      (err, data, message) => {
+        if (!err) {
+          return res.json({ err, data, message });
+        } else {
+          return res.json({ err, data, message });
+        }
       }
-    });
+    );
   },
 
   DeleteParts: (req, res) => {

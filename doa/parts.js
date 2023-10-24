@@ -1,9 +1,11 @@
-const parts = require("../models/parts");
+const partMaster = require("../models/partMaster");
 
 module.exports = {
   addParts: async (data, cb) => {
     try {
-      const resp = await new parts(data);
+      const docCount = await partMaster.estimatedDocumentCount();
+      console.log("docCount : ", docCount);
+      const resp = await new partMaster({ ...data, partIndex: docCount + 1 });
       if (resp) {
         const save_resp = await resp.save();
         if (save_resp) {
@@ -19,7 +21,7 @@ module.exports = {
 
   getAllParts: async (data, cb) => {
     try {
-      const resp = await parts.find();
+      const resp = await partMaster.find();
       if (resp) {
         cb(null, resp, "Part gets successfull!");
       } else {
@@ -31,9 +33,11 @@ module.exports = {
   },
 
   updateParts: async (data, cb) => {
+    console.log("data : ", data);
     try {
-      const resp = await parts.findByIdAndUpdate(data.id, data, {
+      const resp = await partMaster.findByIdAndUpdate(data.docId, data, {
         new: true,
+        useFindAndModify: false,
       });
       if (resp) {
         cb(null, resp, "Part update successfull!");
@@ -47,7 +51,7 @@ module.exports = {
 
   deleteParts: async (data, cb) => {
     try {
-      const resp = await parts.findByIdAndRemove(data.id);
+      const resp = await partMaster.findByIdAndRemove(data.id);
       if (resp) {
         cb(null, resp, "Part delete successfull!");
       } else {

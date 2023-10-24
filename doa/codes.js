@@ -31,6 +31,7 @@ module.exports = {
   },
 
   updateCode: async (data, cb) => {
+    console.log("data: ", data);
     try {
       const resp = await codes.findByIdAndUpdate(data.docId, data, {
         new: true,
