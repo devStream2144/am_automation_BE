@@ -32,4 +32,42 @@ module.exports = {
       }
     });
   },
+
+  GetShiftProduction: (req, res) => {
+    ModalMasterServices.GetShiftProduction(null, (err, data, message) => {
+      if (!err) {
+        return res.json({ err, data, message });
+      } else {
+        return res.json({ err, data, message });
+      }
+    });
+  },
+
+  GetMonthProduction: (req, res) => {
+    const data = {
+      month: req.params.month,
+      year: req.params.year,
+    };
+    ModalMasterServices.GetMonthProduction(data, (err, data, message) => {
+      if (!err) {
+        return res.json({ err, data, message });
+      } else {
+        return res.json({ err, data, message });
+      }
+    });
+  },
+
+  GetYearProduction: (req, res) => {
+    const data = {
+      month: req.params.month,
+      year: req.params.year,
+    };
+    ModalMasterServices.GetYearProduction(data, (err, data, message) => {
+      if (!err) {
+        return res.json({ err, data, message });
+      } else {
+        return res.json({ err, data, message });
+      }
+    });
+  },
 };
