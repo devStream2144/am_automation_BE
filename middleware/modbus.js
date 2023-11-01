@@ -11,6 +11,7 @@ const options = {
 module.exports = {
   reqToWriteData: (req, res, next) => {
     const partArr = req.body;
+    ("");
     socket.on("connect", function () {
       client
         .writeMultipleRegisters(0, partArr)

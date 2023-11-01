@@ -55,10 +55,67 @@ const modalMasterServices = () => {
     });
   };
 
+  const GetShiftProduction = async (data, cb) => {
+    modalMaster.getShiftProduction(data, (err, data, message) => {
+      if (err) {
+        var resp = {
+          message: message,
+          success: false,
+        };
+        cb(err, null, resp);
+      } else {
+        var resp = {
+          message: message,
+          success: true,
+        };
+        cb(err, data, resp);
+      }
+    });
+  };
+
+  const GetMonthProduction = async (data, cb) => {
+    modalMaster.getMonthProduction(data, (err, data, message) => {
+      if (err) {
+        var resp = {
+          message: message,
+          success: false,
+        };
+        cb(err, null, resp);
+      } else {
+        var resp = {
+          message: message,
+          success: true,
+        };
+        cb(err, data, resp);
+      }
+    });
+  };
+
+  const GetYearProduction = async (data, cb) => {
+    modalMaster.getYearProduction(data, (err, data, message) => {
+      if (err) {
+        var resp = {
+          message: message,
+          success: false,
+        };
+        cb(err, null, resp);
+      } else {
+        var resp = {
+          message: message,
+          success: true,
+        };
+        cb(err, data, resp);
+      }
+    });
+  };
+
   return {
     AddModalMaster,
     UploadVideoFile,
     GetAllModals,
+    GetShiftProduction,
+    GetMonthProduction,
+    GetYearProduction,
   };
 };
 
