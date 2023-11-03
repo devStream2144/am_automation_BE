@@ -70,4 +70,14 @@ module.exports = {
       }
     });
   },
+
+  GetShiftwiseProductin: (req, res) => {
+    ModalMasterServices.GetShiftwiseProductin(null, (err, data, message) => {
+      if (!err) {
+        return res.json({ err, data, message });
+      } else {
+        return res.json({ err, data, message });
+      }
+    });
+  },
 };

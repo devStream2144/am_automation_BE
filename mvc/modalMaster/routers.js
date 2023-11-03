@@ -6,6 +6,7 @@ const controller = require("./controllers");
 
 router.post("/add", controller.AddModalMaster);
 router.get("/production/shift", controller.GetShiftProduction);
+router.get("/production/shiftwise", controller.GetShiftwiseProductin);
 router.get("/production/:month/:year", controller.GetMonthProduction);
 router.get("/production/:year", controller.GetYearProduction);
 router.post("/video", upload.single("video"), (req, res) => {

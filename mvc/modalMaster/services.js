@@ -109,6 +109,24 @@ const modalMasterServices = () => {
     });
   };
 
+  const GetShiftwiseProductin = async (data, cb) => {
+    modalMaster.getShiftwiseProductin(data, (err, data, message) => {
+      if (err) {
+        var resp = {
+          message: message,
+          success: false,
+        };
+        cb(err, null, resp);
+      } else {
+        var resp = {
+          message: message,
+          success: true,
+        };
+        cb(err, data, resp);
+      }
+    });
+  };
+
   return {
     AddModalMaster,
     UploadVideoFile,
@@ -116,6 +134,7 @@ const modalMasterServices = () => {
     GetShiftProduction,
     GetMonthProduction,
     GetYearProduction,
+    GetShiftwiseProductin,
   };
 };
 

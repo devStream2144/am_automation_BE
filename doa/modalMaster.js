@@ -128,4 +128,32 @@ module.exports = {
       cb(true, null, "Shift productions get failed for the year.");
     }
   },
+
+  getShiftwiseProductin: async (data, cb) => {
+    try {
+      // Fri Nov 03 2023 20:21:41 GMT+0530 (India Standard Time)
+      // 2023-10-24T15:54:41.201Z
+      // 2023-10-24T18:56:48.752Z
+      const startTime = new Date("2023-10-24T15:54:41.201Z");
+      const endTime = new Date("2023-10-24T18:56:48.752Z");
+      const pipeline = [
+        {
+          $match: {
+            dateAndTime: {
+              $gte: startTime,
+              $lt: endTime,
+            },
+          },
+        },
+      ];
+      const resp = await modalMaster.aggregate(pipeline);
+      if (resp) {
+        cb(null, resp, "Part gets successfull!");
+      } else {
+        cb(true, null, "Part get failed!");
+      }
+    } catch (e) {
+      cb(e, null, "Part gets failed!");
+    }
+  },
 };
