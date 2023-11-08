@@ -72,7 +72,13 @@ module.exports = {
   },
 
   GetShiftwiseProductin: (req, res) => {
-    ModalMasterServices.GetShiftwiseProductin(null, (err, data, message) => {
+    const dateTo = req.params.to;
+    const dateFrom = req.params.from;
+    const data = {
+      dateTo,
+      dateFrom,
+    };
+    ModalMasterServices.GetShiftwiseProductin(data, (err, data, message) => {
       if (!err) {
         return res.json({ err, data, message });
       } else {

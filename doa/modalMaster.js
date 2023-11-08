@@ -130,12 +130,21 @@ module.exports = {
   },
 
   getShiftwiseProductin: async (data, cb) => {
+    const { dateTo, dateFrom } = data;
     try {
       // Fri Nov 03 2023 20:21:41 GMT+0530 (India Standard Time)
       // 2023-10-24T15:54:41.201Z
       // 2023-10-24T18:56:48.752Z
-      const startTime = new Date("2023-10-24T15:54:41.201Z");
-      const endTime = new Date("2023-10-24T18:56:48.752Z");
+      // const startTime = new Date(dateTo);
+      // const endTime = new Date(dateFrom);
+
+      const inputDate = "2023-10-24 03:54 PM"; // Adjust this based on your input
+
+      // Convert the input date to ISO 8601 format
+      const startDate = new Date(inputDate);
+      const endDate = new Date(startDate);
+      endDate.setHours(endDate.getHours() + 8);
+
       const pipeline = [
         {
           $match: {
