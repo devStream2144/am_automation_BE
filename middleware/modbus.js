@@ -10,37 +10,40 @@ const options = {
 
 module.exports = {
   reqToWriteData: (req, res, next) => {
-    const partArr = req.body;
-    ("");
-    socket.on("connect", function () {
-      client
-        .writeMultipleRegisters(0, partArr)
-        .then(function (resp) {
-          req.info = {
-            data: resp,
-            message: "Data write successfully!",
-            status: 200,
-            error: false,
-          };
-          socket.end();
-          next();
-        })
-        .catch(function () {
-          req.info = {
-            data: arguments,
-            message: "Data write failed!",
-            status: 400,
-            error: true,
-          };
-          socket.wend();
-          next();
-        });
-    });
-    socket.on("error", () => {
-      console.error;
-      next();
-    });
-    socket.connect(options);
+    try {
+      const partArr = req.body;
+      console.log(partArr);
+      socket.on("connect", function () {
+        client
+          .writeMultipleRegisters(0, partArr)
+          .then(function (resp) {
+            req.info = {
+              data: resp,
+              message: "Data write successfully!",
+              status: 200,
+              error: false,
+            };
+            socket.end();
+            next();
+          })
+          .catch(function (err) {
+            console.log("err : ", err);
+            req.info = {
+              data: err,
+              message: "Data write failed!",
+              status: 400,
+              error: true,
+            };
+            socket.end();
+            next();
+          });
+      });
+      socket.on("error", () => {
+        console.error;
+        next();
+      });
+      socket.connect(options);
+    } catch (e) {}
   },
 
   reqToReadData: (req, res, next) => {
