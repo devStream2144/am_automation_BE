@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
 
 const modalMasterSchema = mongoose.Schema({
   fgCode: {
@@ -22,8 +23,8 @@ const modalMasterSchema = mongoose.Schema({
     require: true,
   },
   dateAndTime: {
-    type: Date,
-    default: Date.now(),
+    type: String,
+    default: moment().format("YYYY-MM-DDTHH:mm:ss"),
   },
 });
 

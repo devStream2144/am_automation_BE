@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect(process.env.DB, {})
+  .connect(process.env.DB_SEC, {})
   .then(() => {
     console.log("DB connection established");
   })
