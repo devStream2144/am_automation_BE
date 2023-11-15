@@ -47,40 +47,44 @@ module.exports = {
   },
 
   reqToReadData: (req, res, next) => {
-    socket.on("connect", function () {
-      client
-        .readHoldingRegisters(0, 10)
-        .then(function (resp) {
-          req.info = {
-            data: resp.response._body.valuesAsArray,
-            message: "Data read successfully!",
-            status: 200,
-            error: true,
-          };
-          socket.end();
+    try {
+      socket.on("connect", function () {
+        client
+          .readHoldingRegisters(0, 10)
+          .then(function (resp) {
+            req.info = {
+              data: resp.response._body.valuesAsArray,
+              message: "Data read successfully!",
+              status: 200,
+              error: true,
+            };
+            socket.end();
+            next();
+          })
+          .catch(function () {
+            let error = require("util").inspect(arguments, {
+              depth: null,
+            });
+            req.info = {
+              data: error,
+              message: "Data read failed!",
+              status: 400,
+              error: true,
+            };
+            socket.end();
+            next();
+          });
+      });
+      socket.on(
+        "error",
+        socket.on("error", () => {
+          console.error;
           next();
         })
-        .catch(function () {
-          let error = require("util").inspect(arguments, {
-            depth: null,
-          });
-          req.info = {
-            data: error,
-            message: "Data read failed!",
-            status: 400,
-            error: true,
-          };
-          socket.end();
-          next();
-        });
-    });
-    socket.on(
-      "error",
-      socket.on("error", () => {
-        console.error;
-        next();
-      })
-    );
-    socket.connect(options);
+      );
+      socket.connect(options);
+    } catch (e) {
+      res.status(400).json({ error: e, message: "Data reading failed!" });
+    }
   },
 };

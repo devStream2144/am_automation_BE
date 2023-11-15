@@ -1,0 +1,66 @@
+
+
+
+
+if(6:00>=rtc && 15:00<=rtc){
+var1 === A;
+}
+ 
+
+if(6:00>=rtc && 15:00<=rtc){
+var1 === B;
+}
+ 
+
+if(6:00>=rtc && 15:00<=rtc){
+varZ ==== === C;
+}
+ 
+
+15:00>=   23:00<=  ===B
+23:00<=   6:00=>   ===C
+
+
+
+write scan
+
+date     count
+
+rtc        1
+rtc        2
+rtc        3
+rtc        4
+rtc        5
+reading  simulte     method
+
+
+timer    inrterval ===1sec
+
+
+if(modbus.holdingRegister(33)===1 && VarZ ===A)
+{
+
+var1 === datetime.now()  time
+
+4
+var2 ====previos count +1;  int
+insert data to table(var1,var2);
+
+}
+
+
+PLC      Cylce  ===1 22:57
+
+         Cycle ====2  23:00
+
+         Cycle ====3 23:04
+.............
+
+
+
+
+........
+  ................cycle n  4:59
+
+
+
