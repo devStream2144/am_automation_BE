@@ -11,6 +11,28 @@ module.exports = {
     });
   },
 
+  DeleteModal: (req, res) => {
+    var data = { id: req.params.id };
+    ModalMasterServices.DeleteModal(data, (err, data, message) => {
+      if (!err) {
+        return res.json({ err, data, message });
+      } else {
+        return res.json({ err, data, message });
+      }
+    });
+  },
+
+  UpdateModal: (req, res) => {
+    var data = { id: req.params.id, modalData: req.body };
+    ModalMasterServices.UpdateModal(data, (err, data, message) => {
+      if (!err) {
+        return res.json({ err, data, message });
+      } else {
+        return res.json({ err, data, message });
+      }
+    });
+  },
+
   UploadVideoFile: (req, res) => {
     var video = req.body.video;
     ModalMasterServices.UploadVideoFile(video, (err, data, message) => {

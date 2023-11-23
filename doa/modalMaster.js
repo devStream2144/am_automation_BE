@@ -17,6 +17,40 @@ module.exports = {
     }
   },
 
+  deleteModal: async (data, cb) => {
+    try {
+      const id = data.id;
+      console.log("id : ", id);
+      const resp = await modalMaster.findByIdAndDelete(id);
+      if (resp) {
+        cb(null, resp, "Modal delete successfull!");
+      } else {
+        cb(true, null, "Modal delete failed!");
+      }
+    } catch (e) {
+      console.log("e : ", e);
+      cb(e, null, "Modal delete failed - catched!");
+    }
+  },
+
+  updateModal: async (data, cb) => {
+    try {
+      const id = data.id;
+      console.log("id : ", id);
+      const resp = await modalMaster.findByIdAndUpdate(id, data.modalData, {
+        new: true,
+      });
+      if (resp) {
+        cb(null, resp, "Modal updated successfull!");
+      } else {
+        cb(true, null, "Modal updated failed!");
+      }
+    } catch (e) {
+      console.log("e : ", e);
+      cb(e, null, "Modal updated failed - catched!");
+    }
+  },
+
   uploadVideoFile: async (file, cb) => {
     try {
       const resp = await new modalMaster(file);

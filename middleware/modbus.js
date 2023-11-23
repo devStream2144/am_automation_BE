@@ -58,11 +58,11 @@ module.exports = {
               status: 200,
               error: true,
             };
-            socket.end();
             next();
+            socket.end();
           })
           .catch(function () {
-            let error = require("util").inspect(arguments, {
+            const error = require("util").inspect(arguments, {
               depth: null,
             });
             req.info = {
@@ -71,19 +71,51 @@ module.exports = {
               status: 400,
               error: true,
             };
-            socket.end();
             next();
+            socket.end();
           });
       });
-      socket.on(
-        "error",
-        socket.on("error", () => {
-          console.error;
-          next();
-        })
-      );
+      socket.on("error", console.error);
       socket.connect(options);
     } catch (e) {
+      console.log("err : ", e);
+      res.status(400).json({ error: e, message: "Data reading failed!" });
+    }
+  },
+
+  reqToReadInputRegister: (req, res, next) => {
+    try {
+      socket.on("connect", function () {
+        client
+          .readHoldingRegisters(39, 1)
+          .then(function (resp) {
+            req.info = {
+              data: resp.response._body.valuesAsArray,
+              message: "Data read successfully!",
+              status: 200,
+              error: true,
+            };
+            next();
+            socket.end();
+          })
+          .catch(function () {
+            const error = require("util").inspect(arguments, {
+              depth: null,
+            });
+            req.info = {
+              data: error,
+              message: "Data read failed!",
+              status: 400,
+              error: true,
+            };
+            next();
+            socket.end();
+          });
+      });
+      socket.on("error", console.error);
+      socket.connect(options);
+    } catch (e) {
+      console.log("err : ", e);
       res.status(400).json({ error: e, message: "Data reading failed!" });
     }
   },

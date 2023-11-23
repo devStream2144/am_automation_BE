@@ -1,13 +1,23 @@
-const express = require("express");
-const modbusClient = require("../../middleware/modbus");
-const router = express.Router();
+// const express = require("express");
+// const modbusClient = require("../../middleware/modbus");
+// const router = express.Router();
 
-router.post("/write", modbusClient.reqToWriteData, (req, res) => {
-  res.status(200).json({ data: req.info });
-});
+// const Modbus = require("jsmodbus");
+// const net = require("net");
+// const socket = new net.Socket();
+// const unitId = 1;
+// const client = new Modbus.client.TCP(socket, unitId);
+// const options = {
+//   host: "192.168.1.220",
+//   port: 502,
+// };
 
-router.get("/read", modbusClient.reqToReadData, (req, res) => {
-  res.status(200).json({ data: req.info });
-});
+// // router.post("/write", modbusClient.reqToWriteData, (req, res) => {
+// //   res.status(200).json({ data: req.info });
+// // });
 
-module.exports = router;
+// // router.get("/read", modbusClient.reqToReadData, (req, res) => {
+// //   res.status(200).json({ data: req.info });
+// // });
+
+// module.exports = router;

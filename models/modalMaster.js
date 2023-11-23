@@ -14,6 +14,14 @@ const modalMasterSchema = mongoose.Schema({
     type: Array,
     require: true,
   },
+  quantityArr: {
+    type: Array,
+    require: true,
+  },
+  partSelectSequence: {
+    type: Array,
+    require: true,
+  },
   quantity: {
     type: Number,
     require: true,
