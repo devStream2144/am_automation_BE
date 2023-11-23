@@ -19,6 +19,42 @@ const modalMasterServices = () => {
     });
   };
 
+  const DeleteModal = async (data, cb) => {
+    modalMaster.deleteModal(data, (err, data, message) => {
+      if (err) {
+        var resp = {
+          message: message,
+          success: false,
+        };
+        cb(err, null, resp);
+      } else {
+        var resp = {
+          message: message,
+          success: true,
+        };
+        cb(err, data, resp);
+      }
+    });
+  };
+
+  const UpdateModal = async (data, cb) => {
+    modalMaster.updateModal(data, (err, data, message) => {
+      if (err) {
+        var resp = {
+          message: message,
+          success: false,
+        };
+        cb(err, null, resp);
+      } else {
+        var resp = {
+          message: message,
+          success: true,
+        };
+        cb(err, data, resp);
+      }
+    });
+  };
+
   const UploadVideoFile = async (data, cb) => {
     modalMaster.uploadVideoFile(data, (err, data, message) => {
       if (err) {
@@ -135,6 +171,8 @@ const modalMasterServices = () => {
     GetMonthProduction,
     GetYearProduction,
     GetShiftwiseProductin,
+    DeleteModal,
+    UpdateModal,
   };
 };
 

@@ -1,0 +1,65 @@
+app.get("/modbus/read/singal", async (req, res) => {
+  try {
+    const socket = new net.Socket();
+    const client = new Modbus.client.TCP(socket, unitId);
+    socket.on("connect", async function () {
+      try {
+        const resp = await client.readHoldingRegisters(39, 1);
+        if (resp) {
+          client
+            .writeSingleRegister(39, 0)
+            .then(function (resp) {
+              console.log(resp);
+              socket.end();
+            })
+            .catch(function () {
+              console.error(arguments);
+            });
+        }
+        res.status(200).json({ data: resp.response._body.valuesAsArray });
+        console.log("resp: ", resp.response._body.valuesAsArray);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        socket.end();
+      }
+    });
+    socket.on("error", console.error);
+    socket.connect(options);
+  } catch (err) {
+    console.log("error: ", err);
+  }
+});
+
+app.get("/modbus/read/singal", async (req, res) => {
+  try {
+    const socket = new net.Socket();
+    const client = new Modbus.client.TCP(socket, unitId);
+    socket.on("connect", async function () {
+      try {
+        const resp = await client.readHoldingRegisters(39, 1);
+        if (resp) {
+          client
+            .writeSingleRegister(39, 0)
+            .then(function (resp) {
+              console.log(resp);
+              socket.end();
+            })
+            .catch(function () {
+              console.error(arguments);
+            });
+        }
+        res.status(200).json({ data: resp.response._body.valuesAsArray });
+        console.log("resp: ", resp.response._body.valuesAsArray);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        socket.end();
+      }
+    });
+    socket.on("error", console.error);
+    socket.connect(options);
+  } catch (err) {
+    console.log("error: ", err);
+  }
+});
