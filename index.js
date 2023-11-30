@@ -8,6 +8,9 @@ const PORT = 8080 || process.env.PORT;
 // modbus connection setup
 const Modbus = require("jsmodbus");
 const net = require("net");
+
+const dateAndCount = require("./doa/dateAndCount");
+
 const unitId = 1;
 const options = {
   host: "192.168.1.220",
@@ -24,7 +27,7 @@ require("./DB/connection");
 app.use("/part", require("./mvc/parts/routers"));
 app.use("/modal", require("./mvc/modalMaster/routers"));
 app.use("/code", require("./mvc/codes/routers"));
-// app.use("/modbus", require("./mvc/modbus/routers"));
+app.use("/admin", require("./mvc/admins/routers"));
 app.use("/dac", require("./mvc/dateAndCount/routers"));
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -71,13 +74,16 @@ app.get("/modbus/read", async (req, res) => {
     const client = new Modbus.client.TCP(socket, unitId);
     socket.on("connect", async function () {
       try {
-        const resp = await client.readHoldingRegisters(0, 15);
+        const resp = await client.readHoldingRegisters(40, 15);
         const resp2 = await client.readHoldingRegisters(39, 1);
-        if (resp2) {
+        console.log("ZERO : ", resp2?.response._body?.valuesAsArray[0]);
+        if (resp2?.response._body?.valuesAsArray[0] === 1) {
           client
             .writeSingleRegister(39, 0)
             .then(function (resp) {
-              console.log(resp);
+              dateAndCount.addDateAndCount(null, (err, data, message) => {
+                console.log(`${message} : `, data);
+              });
               socket.end();
             })
             .catch(function () {
@@ -85,21 +91,10 @@ app.get("/modbus/read", async (req, res) => {
             });
         }
         if (resp) {
-          const numberOfOnes = resp?.response._body?.valuesAsArray?.filter(
-            (element) => element === 1
-          ).length;
-          if (numberOfOnes > holdLengthOfReadedData) {
-            holdLengthOfReadedData = numberOfOnes;
-            res.status(200).json({
-              statusAddresses: resp?.response._body?.valuesAsArray,
-              isScreenClear: resp2?.response._body?.valuesAsArray,
-            });
-          } else {
-            res.status(200).json({
-              statusAddresses: null,
-              isScreenClear: resp2?.response._body?.valuesAsArray,
-            });
-          }
+          res.status(200).json({
+            statusAddresses: resp?.response._body?.valuesAsArray,
+            isScreenClear: resp2?.response._body?.valuesAsArray,
+          });
         }
       } catch (error) {
         console.error(error);

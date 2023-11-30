@@ -22,4 +22,23 @@ module.exports = {
       cb(e, null, "Date and count added failed!");
     }
   },
+
+  getDateAndCount: async (data, cb) => {
+    const { fromTime, toTime } = data;
+    try {
+      const resp = await dateAndCount.find({
+        date: {
+          $gte: fromTime,
+          $lt: toTime,
+        },
+      });
+      if (resp) {
+        cb(null, resp, "Date and count add successfull!");
+      } else {
+        cb(null, all_recs, "Date and count get failed!");
+      }
+    } catch (err) {
+      cb(err, null, "Date and count get failed! - catched");
+    }
+  },
 };

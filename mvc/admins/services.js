@@ -1,8 +1,8 @@
-const dateAndCount = require("../../doa/dateAndCount");
+const admin = require("../../doa/admins");
 
-const dateAndCountServices = () => {
-  const AddDateAndCount = async (data, cb) => {
-    dateAndCount.addDateAndCount(data, (err, data, message) => {
+const adminServices = () => {
+  const AddAdmin = async (data, cb) => {
+    admin.addAdmin(data, (err, data, message) => {
       if (err) {
         var resp = {
           message: message,
@@ -18,9 +18,8 @@ const dateAndCountServices = () => {
       }
     });
   };
-
-  const GetDateAndCount = async (data, cb) => {
-    dateAndCount.getDateAndCount(data, (err, data, message) => {
+  const GetAdmin = async (data, cb) => {
+    admin.getAdmin(data, (err, data, message) => {
       if (err) {
         var resp = {
           message: message,
@@ -36,10 +35,10 @@ const dateAndCountServices = () => {
       }
     });
   };
-
   return {
-    AddDateAndCount,
-    GetDateAndCount,
+    AddAdmin: AddAdmin,
+    GetAdmin: GetAdmin,
   };
 };
-module.exports = dateAndCountServices();
+
+module.exports = adminServices();
